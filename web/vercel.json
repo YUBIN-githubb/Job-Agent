@@ -1,0 +1,10 @@
+{
+  "functions": {
+    "src/app/api/agent/essay-writer/route.ts": {
+      "maxDuration": 60
+    },
+    "src/app/api/agent/company-analyst/route.ts": {
+      "maxDuration": 60
+    }
+  }
+}

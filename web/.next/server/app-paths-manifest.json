@@ -1,0 +1,7 @@
+{
+  "/api/agent/company-analyst/route": "app/api/agent/company-analyst/route.js",
+  "/(dashboard)/dashboard/page": "app/(dashboard)/dashboard/page.js",
+  "/(dashboard)/jobs/[id]/page": "app/(dashboard)/jobs/[id]/page.js",
+  "/(dashboard)/episodes/page": "app/(dashboard)/episodes/page.js",
+  "/(dashboard)/jobs/page": "app/(dashboard)/jobs/page.js"
+}

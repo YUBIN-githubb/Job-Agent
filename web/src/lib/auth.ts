@@ -1,0 +1,23 @@
+// Design Ref: §2.3 — NextAuth.js v5 + Google OAuth configuration
+import NextAuth from 'next-auth'
+import Google from 'next-auth/providers/google'
+
+export const { handlers, auth, signIn, signOut } = NextAuth({
+  providers: [
+    Google({
+      clientId: process.env.AUTH_GOOGLE_ID!,
+      clientSecret: process.env.AUTH_GOOGLE_SECRET!,
+    }),
+  ],
+  callbacks: {
+    session({ session, token }) {
+      if (token.sub) {
+        session.user.id = token.sub
+      }
+      return session
+    },
+  },
+  pages: {
+    signIn: '/login',
+  },
+})
