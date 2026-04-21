@@ -1,1 +1,4 @@
 .bkit
+node_modules
+web/.env.local
+web/.env.local.example
