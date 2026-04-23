@@ -6,24 +6,19 @@
           "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22D%3A%5C%5CCode%5C%5Cmy-job-agent%5C%5Cweb%5C%5Csrc%5C%5Ccomponents%5C%5Clayout%5C%5CNavbar.tsx%22%2C%5B%7B%22id%22%3A%2200c7df362283a25292437507e1e026132c4a6e5372%22%2C%22exportedName%22%3A%22%24%24RSC_SERVER_ACTION_0%22%7D%5D%5D%5D&__client_imported__=!",
           "async": false
         },
-        "app/(dashboard)/jobs/[id]/page": {
-          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22D%3A%5C%5CCode%5C%5Cmy-job-agent%5C%5Cweb%5C%5Csrc%5C%5Ccomponents%5C%5Clayout%5C%5CNavbar.tsx%22%2C%5B%7B%22id%22%3A%2200c7df362283a25292437507e1e026132c4a6e5372%22%2C%22exportedName%22%3A%22%24%24RSC_SERVER_ACTION_0%22%7D%5D%5D%5D&__client_imported__=!",
-          "async": false
-        },
         "app/(dashboard)/episodes/page": {
           "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22D%3A%5C%5CCode%5C%5Cmy-job-agent%5C%5Cweb%5C%5Csrc%5C%5Ccomponents%5C%5Clayout%5C%5CNavbar.tsx%22%2C%5B%7B%22id%22%3A%2200c7df362283a25292437507e1e026132c4a6e5372%22%2C%22exportedName%22%3A%22%24%24RSC_SERVER_ACTION_0%22%7D%5D%5D%5D&__client_imported__=!",
           "async": false
         },
-        "app/(dashboard)/dashboard/page": {
+        "app/(dashboard)/jobs/[id]/page": {
           "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22D%3A%5C%5CCode%5C%5Cmy-job-agent%5C%5Cweb%5C%5Csrc%5C%5Ccomponents%5C%5Clayout%5C%5CNavbar.tsx%22%2C%5B%7B%22id%22%3A%2200c7df362283a25292437507e1e026132c4a6e5372%22%2C%22exportedName%22%3A%22%24%24RSC_SERVER_ACTION_0%22%7D%5D%5D%5D&__client_imported__=!",
           "async": false
         }
       },
       "layer": {
         "app/(dashboard)/jobs/page": "rsc",
-        "app/(dashboard)/jobs/[id]/page": "rsc",
         "app/(dashboard)/episodes/page": "rsc",
-        "app/(dashboard)/dashboard/page": "rsc"
+        "app/(dashboard)/jobs/[id]/page": "rsc"
       }
     },
     "40a200b94cd17c6589f27c5f27d893b58d49e08ccc": {
@@ -74,28 +69,6 @@
         "app/(dashboard)/jobs/[id]/page": "action-browser"
       }
     },
-    "40d8a02767f65e1b3fe088e0af4d12072f42acc145": {
-      "workers": {
-        "app/(dashboard)/jobs/[id]/page": {
-          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22D%3A%5C%5CCode%5C%5Cmy-job-agent%5C%5Cweb%5C%5Csrc%5C%5Cfeatures%5C%5Cessays%5C%5Cactions.ts%22%2C%5B%7B%22id%22%3A%2240d8a02767f65e1b3fe088e0af4d12072f42acc145%22%2C%22exportedName%22%3A%22saveEssay%22%7D%2C%7B%22id%22%3A%2260c3fd2548eb1ef07b43f13b0a3c804888f8637831%22%2C%22exportedName%22%3A%22updateEssayStatus%22%7D%5D%5D%2C%5B%22D%3A%5C%5CCode%5C%5Cmy-job-agent%5C%5Cweb%5C%5Csrc%5C%5Cfeatures%5C%5Cjobs%5C%5Cactions.ts%22%2C%5B%7B%22id%22%3A%2240a200b94cd17c6589f27c5f27d893b58d49e08ccc%22%2C%22exportedName%22%3A%22createJob%22%7D%2C%7B%22id%22%3A%2240da5a5c8b65bd12595890e57f66cb07d53a0bcce3%22%2C%22exportedName%22%3A%22deleteJob%22%7D%2C%7B%22id%22%3A%226028516532815da7e058de4a5d834d0b347c15c1bf%22%2C%22exportedName%22%3A%22updateJobStatus%22%7D%5D%5D%5D&__client_imported__=true!",
-          "async": false
-        }
-      },
-      "layer": {
-        "app/(dashboard)/jobs/[id]/page": "action-browser"
-      }
-    },
-    "60c3fd2548eb1ef07b43f13b0a3c804888f8637831": {
-      "workers": {
-        "app/(dashboard)/jobs/[id]/page": {
-          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22D%3A%5C%5CCode%5C%5Cmy-job-agent%5C%5Cweb%5C%5Csrc%5C%5Cfeatures%5C%5Cessays%5C%5Cactions.ts%22%2C%5B%7B%22id%22%3A%2240d8a02767f65e1b3fe088e0af4d12072f42acc145%22%2C%22exportedName%22%3A%22saveEssay%22%7D%2C%7B%22id%22%3A%2260c3fd2548eb1ef07b43f13b0a3c804888f8637831%22%2C%22exportedName%22%3A%22updateEssayStatus%22%7D%5D%5D%2C%5B%22D%3A%5C%5CCode%5C%5Cmy-job-agent%5C%5Cweb%5C%5Csrc%5C%5Cfeatures%5C%5Cjobs%5C%5Cactions.ts%22%2C%5B%7B%22id%22%3A%2240a200b94cd17c6589f27c5f27d893b58d49e08ccc%22%2C%22exportedName%22%3A%22createJob%22%7D%2C%7B%22id%22%3A%2240da5a5c8b65bd12595890e57f66cb07d53a0bcce3%22%2C%22exportedName%22%3A%22deleteJob%22%7D%2C%7B%22id%22%3A%226028516532815da7e058de4a5d834d0b347c15c1bf%22%2C%22exportedName%22%3A%22updateJobStatus%22%7D%5D%5D%5D&__client_imported__=true!",
-          "async": false
-        }
-      },
-      "layer": {
-        "app/(dashboard)/jobs/[id]/page": "action-browser"
-      }
-    },
     "401eebf5c3dd024e7635ef2a0f8a5657632fb98a31": {
       "workers": {
         "app/(dashboard)/episodes/page": {
@@ -127,6 +100,28 @@
       },
       "layer": {
         "app/(dashboard)/episodes/page": "action-browser"
+      }
+    },
+    "40d8a02767f65e1b3fe088e0af4d12072f42acc145": {
+      "workers": {
+        "app/(dashboard)/jobs/[id]/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22D%3A%5C%5CCode%5C%5Cmy-job-agent%5C%5Cweb%5C%5Csrc%5C%5Cfeatures%5C%5Cessays%5C%5Cactions.ts%22%2C%5B%7B%22id%22%3A%2240d8a02767f65e1b3fe088e0af4d12072f42acc145%22%2C%22exportedName%22%3A%22saveEssay%22%7D%2C%7B%22id%22%3A%2260c3fd2548eb1ef07b43f13b0a3c804888f8637831%22%2C%22exportedName%22%3A%22updateEssayStatus%22%7D%5D%5D%2C%5B%22D%3A%5C%5CCode%5C%5Cmy-job-agent%5C%5Cweb%5C%5Csrc%5C%5Cfeatures%5C%5Cjobs%5C%5Cactions.ts%22%2C%5B%7B%22id%22%3A%2240a200b94cd17c6589f27c5f27d893b58d49e08ccc%22%2C%22exportedName%22%3A%22createJob%22%7D%2C%7B%22id%22%3A%2240da5a5c8b65bd12595890e57f66cb07d53a0bcce3%22%2C%22exportedName%22%3A%22deleteJob%22%7D%2C%7B%22id%22%3A%226028516532815da7e058de4a5d834d0b347c15c1bf%22%2C%22exportedName%22%3A%22updateJobStatus%22%7D%5D%5D%5D&__client_imported__=true!",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/(dashboard)/jobs/[id]/page": "action-browser"
+      }
+    },
+    "60c3fd2548eb1ef07b43f13b0a3c804888f8637831": {
+      "workers": {
+        "app/(dashboard)/jobs/[id]/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22D%3A%5C%5CCode%5C%5Cmy-job-agent%5C%5Cweb%5C%5Csrc%5C%5Cfeatures%5C%5Cessays%5C%5Cactions.ts%22%2C%5B%7B%22id%22%3A%2240d8a02767f65e1b3fe088e0af4d12072f42acc145%22%2C%22exportedName%22%3A%22saveEssay%22%7D%2C%7B%22id%22%3A%2260c3fd2548eb1ef07b43f13b0a3c804888f8637831%22%2C%22exportedName%22%3A%22updateEssayStatus%22%7D%5D%5D%2C%5B%22D%3A%5C%5CCode%5C%5Cmy-job-agent%5C%5Cweb%5C%5Csrc%5C%5Cfeatures%5C%5Cjobs%5C%5Cactions.ts%22%2C%5B%7B%22id%22%3A%2240a200b94cd17c6589f27c5f27d893b58d49e08ccc%22%2C%22exportedName%22%3A%22createJob%22%7D%2C%7B%22id%22%3A%2240da5a5c8b65bd12595890e57f66cb07d53a0bcce3%22%2C%22exportedName%22%3A%22deleteJob%22%7D%2C%7B%22id%22%3A%226028516532815da7e058de4a5d834d0b347c15c1bf%22%2C%22exportedName%22%3A%22updateJobStatus%22%7D%5D%5D%5D&__client_imported__=true!",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/(dashboard)/jobs/[id]/page": "action-browser"
       }
     }
   },

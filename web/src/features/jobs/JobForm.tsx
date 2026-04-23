@@ -22,12 +22,12 @@ export default function JobForm({ onClose }: JobFormProps) {
   } = useForm<JobFormValues>({
     resolver: zodResolver(jobSchema),
     defaultValues: {
-      jobId: '',
       company: '',
       title: '',
       deadline: '',
       body: '',
-      questions: [{ number: 1, title: '', body: '' }],
+      charLimit: undefined,
+      questions: [{ number: 1, text: '' }],
     },
   })
 
@@ -63,11 +63,16 @@ export default function JobForm({ onClose }: JobFormProps) {
         <Field label="포지션 *" error={errors.title?.message}>
           <input {...register('title')} placeholder="예: 웹 개발 인턴" className={inputCls(!!errors.title)} />
         </Field>
-        <Field label="공고 ID *" error={errors.jobId?.message}>
-          <input {...register('jobId')} placeholder="예: seoul-upost-intern-2604" className={inputCls(!!errors.jobId)} />
-        </Field>
         <Field label="마감일" error={errors.deadline?.message}>
           <input type="date" {...register('deadline')} className={inputCls(false)} />
+        </Field>
+        <Field label="글자 수 제한" error={errors.charLimit?.message}>
+          <input
+            type="number"
+            {...register('charLimit')}
+            placeholder="예: 500 (전체 문항 공통)"
+            className={inputCls(!!errors.charLimit)}
+          />
         </Field>
       </div>
 
@@ -86,7 +91,7 @@ export default function JobForm({ onClose }: JobFormProps) {
           <p className="text-sm font-medium text-gray-700">자소서 문항 *</p>
           <button
             type="button"
-            onClick={() => append({ number: fields.length + 1, title: '', body: '' })}
+            onClick={() => append({ number: fields.length + 1, text: '' })}
             className="text-xs text-blue-600 hover:text-blue-700"
           >
             + 문항 추가
@@ -110,16 +115,11 @@ export default function JobForm({ onClose }: JobFormProps) {
                   </button>
                 )}
               </div>
-              <input
-                {...register(`questions.${i}.title`)}
-                placeholder="문항 제목 (예: 지원동기 및 진로계획)"
-                className={inputCls(!!errors.questions?.[i]?.title)}
-              />
               <textarea
-                {...register(`questions.${i}.body`)}
-                rows={2}
-                placeholder="문항 본문"
-                className={inputCls(!!errors.questions?.[i]?.body)}
+                {...register(`questions.${i}.text`)}
+                rows={3}
+                placeholder="문항 내용을 입력해 주세요 (예: 지원동기 및 진로계획을 서술하시오)"
+                className={inputCls(!!errors.questions?.[i]?.text)}
               />
             </div>
           ))}

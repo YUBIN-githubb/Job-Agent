@@ -20,12 +20,17 @@ export async function createEpisode(
     return { success: false, error: '입력값을 확인해 주세요' }
   }
 
+  const now = new Date()
+  const yymm = `${String(now.getFullYear()).slice(2)}${String(now.getMonth() + 1).padStart(2, '0')}`
+  const rand = Math.random().toString(36).slice(2, 6)
+  const autoEpisodeId = `ep-${yymm}-${rand}`
+
   const supabase = await createClient()
   const { data, error } = await supabase
     .from('episodes')
     .insert({
       user_id: session.user.id,
-      episode_id: parsed.data.episodeId,
+      episode_id: autoEpisodeId,
       source: parsed.data.source,
       title: parsed.data.title,
       primary_competency: parsed.data.primaryCompetency,
@@ -62,7 +67,6 @@ export async function updateEpisode(
   const { data, error } = await supabase
     .from('episodes')
     .update({
-      episode_id: parsed.data.episodeId,
       source: parsed.data.source,
       title: parsed.data.title,
       primary_competency: parsed.data.primaryCompetency,

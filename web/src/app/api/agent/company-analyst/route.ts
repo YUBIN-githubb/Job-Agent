@@ -1,14 +1,13 @@
-// Design Ref: §4.2 — company-analyst Route Handler (non-streaming, 60초 이내)
+// Design Ref: §4.2 — company-analyst Route Handler (web_search 포함)
 
 import { NextRequest, NextResponse } from 'next/server'
-import { generateText } from 'ai'
-import { createAnthropic } from '@ai-sdk/anthropic'
+import Anthropic from '@anthropic-ai/sdk'
 import { auth } from '@/lib/auth'
 import { createClient } from '@/lib/supabase/server'
 import { toJob } from '@/types/job'
 import { buildCompanyAnalystPrompt } from '@/lib/prompts/company-analyst'
 
-const anthropic = createAnthropic({
+const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY!,
 })
 
@@ -46,11 +45,17 @@ export async function POST(req: NextRequest) {
     jobBody: job.body,
   })
 
-  const { text } = await generateText({
-    model: anthropic('claude-haiku-4-5-20251001'),
-    prompt,
-    maxTokens: 1500,
+  const message = await anthropic.messages.create({
+    model: 'claude-sonnet-4-6',
+    max_tokens: 10000,
+    tools: [{ type: 'web_search_20250305' as const, name: 'web_search' }],
+    messages: [{ role: 'user', content: prompt }],
   })
+
+  const text = message.content
+    .filter((block): block is Anthropic.TextBlock => block.type === 'text')
+    .map((block) => block.text)
+    .join('\n')
 
   // 기업 분석 리포트 저장
   const { data: report, error } = await supabase

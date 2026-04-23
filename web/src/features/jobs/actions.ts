@@ -17,17 +17,26 @@ export async function createJob(formData: unknown): Promise<ActionResult<Job>> {
     return { success: false, error: '입력값을 확인해 주세요' }
   }
 
+  const now = new Date()
+  const yymm = `${String(now.getFullYear()).slice(2)}${String(now.getMonth() + 1).padStart(2, '0')}`
+  const rand = Math.random().toString(36).slice(2, 6)
+  const autoJobId = `job-${yymm}-${rand}`
+
   const supabase = await createClient()
   const { data, error } = await supabase
     .from('jobs')
     .insert({
       user_id: session.user.id,
-      job_id: parsed.data.jobId,
+      job_id: autoJobId,
       company: parsed.data.company,
       title: parsed.data.title,
       deadline: parsed.data.deadline || null,
       body: parsed.data.body || null,
-      questions: parsed.data.questions,
+      questions: parsed.data.questions.map((q) => ({
+        number: q.number,
+        text: q.text,
+        ...(parsed.data.charLimit ? { charLimit: parsed.data.charLimit } : {}),
+      })),
       status: '수집완료',
     })
     .select()

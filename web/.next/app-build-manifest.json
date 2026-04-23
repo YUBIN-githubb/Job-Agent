@@ -16,30 +16,25 @@
       "static/chunks/main-app.js",
       "static/chunks/app/(dashboard)/jobs/page.js"
     ],
-    "/(dashboard)/jobs/[id]/page": [
+    "/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/(dashboard)/jobs/[id]/page.js"
+      "static/chunks/app/page.js"
     ],
     "/(dashboard)/episodes/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/(dashboard)/episodes/page.js"
     ],
+    "/(dashboard)/jobs/[id]/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(dashboard)/jobs/[id]/page.js"
+    ],
     "/api/agent/company-analyst/route": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/api/agent/company-analyst/route.js"
-    ],
-    "/(dashboard)/dashboard/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(dashboard)/dashboard/page.js"
-    ],
-    "/api/agent/essay-writer/route": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/api/agent/essay-writer/route.js"
     ]
   }
 }

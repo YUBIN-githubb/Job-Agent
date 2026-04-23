@@ -2,7 +2,6 @@
 // Design Ref: §5.4 — Essay editor: 스트리밍 생성 + 편집 + 저장 + 글자수
 
 import { useState } from 'react'
-import { useCompletion } from 'ai/react'
 import type { Episode } from '@/types/episode'
 import type { Essay } from '@/types/essay'
 import type { EssayQuestion } from '@/types/job'
@@ -28,32 +27,42 @@ export default function EssayEditor({
   )
   const [showPicker, setShowPicker] = useState(false)
   const [content, setContent] = useState(existingEssay?.content ?? '')
+  const [isLoading, setIsLoading] = useState(false)
+  const [generateError, setGenerateError] = useState('')
   const [saving, setSaving] = useState(false)
   const [saved, setSaved] = useState(false)
   const [saveError, setSaveError] = useState('')
-
-  const { complete, isLoading, error: streamError } = useCompletion({
-    api: '/api/agent/essay-writer',
-    onFinish: (_, completion) => {
-      setContent(completion)
-    },
-  })
 
   async function handleGenerate() {
     if (selectedEpisodeIds.length === 0) {
       alert('에피소드를 먼저 선택해 주세요.')
       return
     }
+    setIsLoading(true)
+    setGenerateError('')
     setContent('')
     setSaved(false)
-    const result = await complete('', {
-      body: {
-        jobId,
-        questionNumber: question.number,
-        episodeIds: selectedEpisodeIds,
-      },
-    })
-    if (result) setContent(result)
+    try {
+      const res = await fetch('/api/agent/essay-writer', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          jobId,
+          questionNumber: question.number,
+          episodeIds: selectedEpisodeIds,
+        }),
+      })
+      const data = await res.json()
+      if (!res.ok) {
+        setGenerateError(data.error ?? '자소서 생성에 실패했습니다')
+        return
+      }
+      setContent(data.content)
+    } catch {
+      setGenerateError('네트워크 오류가 발생했습니다')
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   async function handleSave() {
@@ -62,7 +71,7 @@ export default function EssayEditor({
     const result = await saveEssay({
       jobId,
       questionNumber: question.number,
-      questionText: question.body,
+      questionText: question.text,
       content,
       episodeIds: selectedEpisodeIds,
     })
@@ -83,9 +92,11 @@ export default function EssayEditor({
       <div>
         <div className="flex items-center gap-2">
           <span className="text-xs font-bold text-gray-400">Q{question.number}</span>
-          <h3 className="font-semibold text-gray-900">{question.title}</h3>
+          {question.charLimit && (
+            <span className="text-xs text-gray-400">제한 {question.charLimit}자</span>
+          )}
         </div>
-        <p className="mt-1 text-sm text-gray-600">{question.body}</p>
+        <p className="mt-1 text-sm text-gray-700">{question.text}</p>
       </div>
 
       {/* 에피소드 선택 */}
@@ -112,8 +123,10 @@ export default function EssayEditor({
       <div>
         <div className="mb-1 flex items-center justify-between">
           <span className="text-xs font-medium text-gray-500">자소서</span>
-          <span className={`text-xs ${content.length > 550 ? 'text-red-500' : 'text-gray-400'}`}>
-            {content.length}자
+          <span
+            className={`text-xs ${content.length > (question.charLimit ?? 550) ? 'text-red-500' : 'text-gray-400'}`}
+          >
+            {content.length}{question.charLimit ? ` / ${question.charLimit}` : ''}자
           </span>
         </div>
         <textarea
@@ -127,8 +140,8 @@ export default function EssayEditor({
         {isLoading && (
           <p className="mt-1 text-xs text-blue-500 animate-pulse">AI가 자소서를 생성 중입니다...</p>
         )}
-        {streamError && (
-          <p className="mt-1 text-xs text-red-500">{streamError.message}</p>
+        {generateError && (
+          <p className="mt-1 text-xs text-red-500">{generateError}</p>
         )}
         {saveError && (
           <p className="mt-1 text-xs text-red-500">{saveError}</p>

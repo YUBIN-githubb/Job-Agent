@@ -2,7 +2,6 @@ import { z } from 'zod'
 import { PRIMARY_COMPETENCIES } from '@/types/episode'
 
 export const episodeSchema = z.object({
-  episodeId: z.string().min(1, '에피소드 ID를 입력해 주세요'),
   source: z.string().optional(),
   title: z.string().min(1, '제목을 입력해 주세요').max(100),
   primaryCompetency: z.enum(PRIMARY_COMPETENCIES, {

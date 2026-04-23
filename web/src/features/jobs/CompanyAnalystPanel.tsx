@@ -2,6 +2,8 @@
 // Design Ref: §5.4 — 기업 분석 실행/조회 버튼 + collapsible 리포트
 
 import { useState } from 'react'
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 
 interface CompanyAnalystPanelProps {
   jobId: string
@@ -68,16 +70,76 @@ export default function CompanyAnalystPanel({
       )}
 
       {loading && (
-        <div className="mt-3 flex items-center gap-2 text-xs text-gray-400">
-          <span className="animate-pulse">Claude가 기업을 분석하고 있습니다...</span>
+        <div className="mt-3 space-y-1">
+          <p className="text-xs text-gray-500 animate-pulse">Claude가 기업을 분석하고 있습니다...</p>
+          <p className="text-xs text-gray-400">웹 리서치를 포함하므로 5~10분 정도 소요될 수 있습니다.</p>
         </div>
       )}
 
       {report && open && (
         <div className="mt-4 rounded-lg bg-gray-50 p-4">
-          <pre className="whitespace-pre-wrap text-xs leading-relaxed text-gray-700 font-sans">
+          <ReactMarkdown
+            remarkPlugins={[remarkGfm]}
+            components={{
+              table: ({ children }) => (
+                <div className="my-3 overflow-x-auto">
+                  <table className="w-full border-collapse text-xs">{children}</table>
+                </div>
+              ),
+              thead: ({ children }) => (
+                <thead className="bg-gray-200">{children}</thead>
+              ),
+              tbody: ({ children }) => (
+                <tbody className="divide-y divide-gray-200">{children}</tbody>
+              ),
+              tr: ({ children }) => <tr>{children}</tr>,
+              th: ({ children }) => (
+                <th className="px-3 py-1.5 text-left font-semibold text-gray-700 whitespace-nowrap">
+                  {children}
+                </th>
+              ),
+              td: ({ children }) => (
+                <td className="px-3 py-1.5 text-gray-600 align-top">{children}</td>
+              ),
+              h1: ({ children }) => (
+                <h1 className="text-base font-bold text-gray-900 mt-4 mb-2 first:mt-0">{children}</h1>
+              ),
+              h2: ({ children }) => (
+                <h2 className="text-sm font-semibold text-gray-800 mt-4 mb-1.5 first:mt-0">{children}</h2>
+              ),
+              h3: ({ children }) => (
+                <h3 className="text-sm font-medium text-gray-700 mt-3 mb-1">{children}</h3>
+              ),
+              p: ({ children }) => (
+                <p className="text-xs leading-relaxed text-gray-700 my-1.5">{children}</p>
+              ),
+              ul: ({ children }) => (
+                <ul className="list-disc pl-4 my-1.5 space-y-0.5">{children}</ul>
+              ),
+              ol: ({ children }) => (
+                <ol className="list-decimal pl-4 my-1.5 space-y-0.5">{children}</ol>
+              ),
+              li: ({ children }) => (
+                <li className="text-xs text-gray-700 leading-relaxed">{children}</li>
+              ),
+              strong: ({ children }) => (
+                <strong className="font-semibold text-gray-900">{children}</strong>
+              ),
+              hr: () => <hr className="border-gray-200 my-3" />,
+              a: ({ href, children }) => (
+                <a
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-600 hover:underline"
+                >
+                  {children}
+                </a>
+              ),
+            }}
+          >
             {report}
-          </pre>
+          </ReactMarkdown>
         </div>
       )}
 

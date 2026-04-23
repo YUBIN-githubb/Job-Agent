@@ -1,16 +1,15 @@
-// Design Ref: §4.2 — Essay writer streaming Route Handler
+// Design Ref: §4.2 — Essay writer Route Handler
 // Plan SC: 경험 창작 금지 — episodeIds 비어 있으면 400 반환
 
 import { NextRequest, NextResponse } from 'next/server'
-import { streamText } from 'ai'
-import { createAnthropic } from '@ai-sdk/anthropic'
+import Anthropic from '@anthropic-ai/sdk'
 import { auth } from '@/lib/auth'
 import { createClient } from '@/lib/supabase/server'
 import { toEpisode } from '@/types/episode'
 import { toJob } from '@/types/job'
 import { buildEssayPrompt } from '@/lib/prompts/essay-writer'
 
-const anthropic = createAnthropic({
+const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY!,
 })
 
@@ -79,19 +78,24 @@ export async function POST(req: NextRequest) {
     .single()
 
   const prompt = buildEssayPrompt({
-    questionTitle: question.title,
-    questionBody: question.body,
+    questionText: question.text,
+    charLimit: question.charLimit,
     episodes,
     company: job.company,
     jobTitle: job.title,
     companyReport: reportData?.content,
   })
 
-  const result = streamText({
-    model: anthropic('claude-sonnet-4-6'),
-    prompt,
-    maxTokens: 1024,
+  const message = await anthropic.messages.create({
+    model: 'claude-sonnet-4-6',
+    max_tokens: 1024,
+    messages: [{ role: 'user', content: prompt }],
   })
 
-  return result.toDataStreamResponse()
+  const text = message.content
+    .filter((block): block is Anthropic.TextBlock => block.type === 'text')
+    .map((block) => block.text)
+    .join('\n')
+
+  return NextResponse.json({ content: text })
 }

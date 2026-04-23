@@ -2,8 +2,8 @@
 
 export interface EssayQuestion {
   number: number
-  title: string
-  body: string
+  text: string
+  charLimit?: number
 }
 
 export const JOB_STATUSES = [

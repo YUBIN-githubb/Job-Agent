@@ -42,7 +42,6 @@ export const COMPETENCY_TAGS: Record<PrimaryCompetency, string[]> = {
 }
 
 export const CONTEXT_TAGS = ['인턴', '대외활동', '학교프로젝트', '동아리', '공모전']
-export const TECH_TAGS = ['Python', 'Java', 'SQL', '데이터분석', '설계', 'CAD']
 
 // Supabase snake_case → camelCase 변환
 export function toEpisode(row: Record<string, unknown>): Episode {
